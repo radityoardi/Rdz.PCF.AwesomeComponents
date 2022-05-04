@@ -1,10 +1,14 @@
+import React from "react";
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { HelloWorld, IHelloWorldProps } from "./HelloWorld";
-import * as React from "react";
+import * as Awesome from "./AwesomeAttachment";
 
 export class AwesomeAttachment implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
     private notifyOutputChanged: () => void;
+    private props: Awesome.IAwesomeAttachmentProps = {
+        name: "Hello, World!",
+        outputChanged: this.outputChanged.bind(this)
+    };
 
     /**
      * Empty constructor.
@@ -21,9 +25,11 @@ export class AwesomeAttachment implements ComponentFramework.ReactControl<IInput
     public init(
         context: ComponentFramework.Context<IInputs>,
         notifyOutputChanged: () => void,
-        state: ComponentFramework.Dictionary
+        state: ComponentFramework.Dictionary,
+        container: HTMLDivElement
     ): void {
         this.notifyOutputChanged = notifyOutputChanged;
+        this.props = { ...this.props, context: context };
     }
 
     /**
@@ -32,9 +38,11 @@ export class AwesomeAttachment implements ComponentFramework.ReactControl<IInput
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-        const props: IHelloWorldProps = { name: 'Hello, World!' };
+        console.log(`Context: `, context);
+        this.props = { ...this.props, context: context };
+
         return React.createElement(
-            HelloWorld, props
+            Awesome.AwesomeAttachment, this.props
         );
     }
 
@@ -43,7 +51,7 @@ export class AwesomeAttachment implements ComponentFramework.ReactControl<IInput
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
      */
     public getOutputs(): IOutputs {
-        return { };
+        return {};
     }
 
     /**
@@ -52,5 +60,9 @@ export class AwesomeAttachment implements ComponentFramework.ReactControl<IInput
      */
     public destroy(): void {
         // Add code to cleanup control if necessary
+    }
+
+    private outputChanged(newOutputs: IOutputs) {
+
     }
 }

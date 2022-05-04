@@ -2,5 +2,14 @@
     "extends": "./node_modules/pcf-scripts/tsconfig_base.json",
     "compilerOptions": {
         "typeRoots": ["node_modules/@types"],
+        "target": "es5",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "lib": [
+            "dom",
+            "esnext"
+        ],
+        "jsx": "react-jsx"
     }
 }

@@ -1,0 +1,25 @@
+.awesomeattachment-dropzone {
+	background-color: #EFEFEF;
+	border-radius: 2px;
+	border-color: #CCCCCC;
+	border-width: 2px;
+	border-style: dashed;
+	min-height: 100px;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	cursor: pointer;
+}
+.awesomeattachment-dropzone-files > DIV {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+}
+.awesomeattachment-dropzone-file {
+	background-color: #DDDDDD;
+	border-radius: 5px;
+	height: 112px;
+	width: 150px;
+}
